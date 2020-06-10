@@ -1,0 +1,45 @@
+{% extends 'index.html' %}
+
+{% block nav %}
+<div id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="{{ url_for("index") }}">
+                <img src="../static/imgs/vipa.png">
+                <span><b>AI + X</b> Deep Learning Platform</span>
+            </a>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav nav-pills">
+              <li role="presentation" class="active"><a href="#">Login</a></li>
+              <li role="presentation"><a href="{{ url_for("auth.register") }}">Register</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+    <div class="container padt col-md-offset-4 col-lg-offset-4 col-xl-offset-4">
+        <div class="container-fluid col-lg-4 text-center">
+            <form method="post">
+
+                <div class="input-group" style="margin-top: 30px">
+                    <span class="input-group-addon" id="basic-addon1">EMAIL</span>
+                    <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1"
+                        name="username" id="username" required
+                    >
+                </div>
+
+                <div class="input-group" style="margin-top: 10px">
+                    <span class="input-group-addon" id="basic-addon1">PASSWORD</span>
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1"
+                        name="password" id="password" required
+                    >
+                </div>
+                <button type="submit" class="btn btn-default" style="margin-top: 10px">Log In</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

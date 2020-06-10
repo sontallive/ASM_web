@@ -1,0 +1,134 @@
+ {% extends 'index.html' %}
+
+{% block body %}
+    <div class="container padt" style="height: 100%">
+        <div class="container-fluid col-lg-12" style="height: 100%">
+
+            <div id="alerts" class="row">
+            </div>
+
+            <!--name/btns-->
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2>Train a model
+                        {% if choose_dataset %}
+                            on <span style="color: red">{{ choose_dataset }}</span>
+                        {% endif %}
+                    </h2>
+                </div>
+
+                <div class="col-lg-4 btns text-right" style="margin-top: 22px">
+                    <button id="start_train_btn" class="btn btn-primary" onclick="start_train()">Start</button>
+                    <button id="viz_btn" class="btn btn-info" onclick="visualize()">Visualize</button>
+                    <button id="stop_train_btn" class="btn btn-danger" onclick="stop_train()">Stop</button>
+                    <button id="save_model_btn" class="btn btn-primary" onclick="save_model()">Save Model</button>
+                </div>
+            </div>
+
+            <!--model choices-->
+            <div class="row" style="margin-top: 10px">
+
+                <div class="col-lg-4">
+                    <label for="model_picker" style="font-weight: bold">
+                        Models :
+                    </label>
+                    <select id="model_picker" class="selectpicker" data-style="btn-default">
+                        {% for model in model_tricks.keys() %}
+                            <option value={{ model }}>{{ model }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-lg-4">
+                    <label for="trick_picker" style="font-weight: bold">Tricks : </label>
+                    <select id="trick_picker" class="selectpicker" multiple data-actions-box="true">
+                        {% for trick in model_tricks[model_tricks.keys() | first] %}
+                            <option value="{{ trick }}">{{ trick }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row" style="margin-top: 10px">
+                <div class="col-lg-4">
+                    <label for="pretrain_picker" style="font-weight: bold">Pretrain : </label>
+                    <select id="pretrain_picker" class="selectpicker" data-actions-box="true">
+                        <option value="None">None</option>
+                        {% for pretrain in pretrains[pretrains.keys() | first] %}
+                            <option value="{{ pretrain }}">{{ pretrain }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Start Epoch</span>
+                        <label for="start_epoch"></label>
+                        <input id="start_epoch" type="text" class="form-control" placeholder="your starting epoch num" aria-describedby="basic-addon1" value="0">
+                    </div>
+                </div>
+
+                <div class="col-lg-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Epoch</span>
+                        <label for="epoch_num"></label>
+                        <input id="epoch_num" type="text" class="form-control" placeholder="your epoch num" aria-describedby="basic-addon1" value="5">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" style="margin-top: 20px">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr id="eval_head">
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="eval_body"></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row" style="margin-top: 50px">
+                <div class="col-lg-12">
+                    <h4 class="display-4">Training epoch: <span id="training_idx">0</span> /Stage:<span id="training_stage"></span></h4>
+                </div>
+            </div>
+
+            <!--progress bar-->
+            <div class="row" >
+                <div class="col-lg-12">
+                    <h5><mark>Trained: <span id="trained_num">0</span> / <span id="total_num">0</span></mark></h5>
+                    <div class="progress">
+                        <div id="progress_bar" class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+                             aria-valuemin="0" aria-valuemax="100" style="width: 0">
+                            <span id="progress_val">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-lg-12">
+                <iframe id="visual_frame" src="http://10.214.211.205:6006" style="width:100%;height: 500px;display: none"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let model_tricks = {{ model_tricks | tojson }};
+        let pretrains = {{ pretrains | tojson }};
+        console.log(pretrains)
+        console.log(model_tricks)
+        training = {{ training }};
+        dataset = '{{ choose_dataset }}';
+        console.log("this is test log");
+        console.log("dataset is:",dataset);
+    </script>
+    <script src="../static/js/train.js"></script>
+
+{% endblock %}

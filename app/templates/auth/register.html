@@ -1,0 +1,67 @@
+{% extends 'index.html' %}
+
+{% block nav %}
+<div id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="{{ url_for("index") }}">
+                 <img src="../static/imgs/vipa.png">
+                <span><b>AI + X</b> Deep Learning Platform</span>
+            </a>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav nav-pills">
+              <li role="presentation"><a href="{{ url_for("auth.login") }}">Login</a></li>
+              <li role="presentation" class="active"><a href="#">Register</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container padt">
+        {% if error %}
+            <div class="alert alert-warning">
+                <a class="close" href="#" data-dismiss="alert">&times;</a>
+                <strong>{{error}}</strong>
+            </div>
+        {% endif %}
+
+
+        <div class="container-fluid col-lg-4 text-center col-md-offset-4 col-lg-offset-4 col-xl-offset-4">
+            <form method="post">
+
+                <div class="input-group" style="margin-top: 30px">
+                    <span class="input-group-addon" id="basic-addon1">First Name</span>
+                    <input type="text" class="form-control" placeholder="first name" aria-describedby="basic-addon1"
+                        name="firstName" id="firstName" required
+                    >
+                </div>
+
+                <div class="input-group" style="margin-top: 10px">
+                    <span class="input-group-addon" id="basic-addon1">Second Name</span>
+                    <input type="text" class="form-control" placeholder="second name" aria-describedby="basic-addon1"
+                        name="secondName" id="secondName" required
+                    >
+                </div>
+
+                <div class="input-group" style="margin-top: 10px">
+                    <span class="input-group-addon" id="basic-addon1">EMAIL</span>
+                    <input type="text" class="form-control" placeholder="Email" aria-describedby="basic-addon1"
+                        name="email" id="email" required
+                    >
+                </div>
+
+                <div class="input-group" style="margin-top: 10px">
+                    <span class="input-group-addon" id="basic-addon1">PASSWORD</span>
+                    <input type="password" class="form-control" placeholder="Password" aria-describedby="basic-addon1"
+                        name="password" id="password" required
+                    >
+                </div>
+                <button type="submit" class="btn btn-default" style="margin-top: 10px">Register</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

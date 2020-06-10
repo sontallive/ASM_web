@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI + X</title>
+    <link href="{{ url_for('static',filename='imgs/zjuicon.png')}}" rel="icon">
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap-select.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/style.css')}}" rel="stylesheet">
+    <script src="{{ url_for('static',filename='js/jquery.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap-select.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/echarts.js')}}"></script>
+    <script src="{{ url_for('static',filename='js/dataset.js')}}"></script>
+</head>
+<body>
+{% block nav %}
+<!--navbar-->
+<div id="header" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a href="{{ url_for("index") }}">
+                <img src="../static/imgs/vipa.png">
+                <span><b>香烟检测</b> 主动学习平台</span>
+            </a>
+        </div>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav" style="color: white">
+                <li><a href="{{ url_for("datasets.index") }}">Datasets</a></li>
+                <li><a href="{{ url_for("anno_auto.index") }}" target="_blank">Annotate/AutoLabel</a></li>
+                <li><a href="{{ url_for("train_test.index") }}" target="_blank">Train/Test</a></li>
+                <li><a href="{{ url_for("auth.login_dataturks") }}" target="_blank">Dataturks</a></li>
+                <li><a href="{{ url_for("auth.logout") }}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+
+    <div id="body" class="container padt">
+        <div class="container-fluid col-lg-12">
+            <h2>Let's build a model in three steps</h2>
+
+            <div class="list-group" style="padding:10px 20px;">
+                <a href="{{ url_for("datasets.index") }}" class="list-group-item">
+                    1. Choose a Dataset
+                </a>
+                <a href="{{ url_for("anno_auto.index") }}" target="_blank" class="list-group-item">
+                    2. Annotate data with Dataturks or Active Sample Mining
+                </a>
+                <a href="{{ url_for("train_test.index") }}" target="_blank" class="list-group-item">
+                    3. Choose a model
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+</body>
+</html>
